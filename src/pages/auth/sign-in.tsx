@@ -3,6 +3,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { z } from "zod";
 
 const signInForm = z.object({
@@ -20,6 +21,8 @@ export function SignIn() {
 
   async function handleSignIn(data: SignInFormData) {
     console.log(data);
+
+    toast.success("Enviamos um e-mail de autenticação para você!");
   }
 
   return (
