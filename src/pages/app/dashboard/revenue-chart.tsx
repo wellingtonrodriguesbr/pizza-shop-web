@@ -5,7 +5,14 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Line, LineChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
+import {
+  Line,
+  LineChart,
+  ResponsiveContainer,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+} from "recharts";
 
 import colors from "tailwindcss/colors";
 
@@ -46,6 +53,7 @@ export function RevenueChart() {
                 })
               }
             />
+            <CartesianGrid vertical={false} className="stroke-muted" />
             <Line
               stroke={colors.violet[500]}
               type="linear"
