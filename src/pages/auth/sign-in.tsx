@@ -7,6 +7,9 @@ import { Link } from "react-router-dom";
 import { toast } from "sonner";
 import { z } from "zod";
 
+import { useMutation } from "@tanstack/react-query";
+import { signIn } from "@/api/sign-in";
+
 const signInForm = z.object({
   email: z.string().email(),
 });
@@ -20,10 +23,17 @@ export function SignIn() {
     formState: { isSubmitting },
   } = useForm<SignInFormData>();
 
-  async function handleSignIn(data: SignInFormData) {
-    console.log(data);
+  const { mutateAsync: authenticate } = useMutation({
+    mutationFn: signIn,
+  });
 
-    toast.success("Enviamos um e-mail de autenticação para você!");
+  async function handleSignIn(data: SignInFormData) {
+    try {
+      await authenticate({ email: data.email });
+      toast.success("Enviamos um e-mail de autenticação para você!");
+    } catch (error) {
+      toast.error("Credenciais inválidas!");
+    }
   }
 
   return (
