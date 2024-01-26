@@ -1,9 +1,11 @@
+import { registerRestaurant } from "@/api/register-restaurant";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useMutation } from "@tanstack/react-query";
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { z } from "zod";
 
@@ -17,18 +19,36 @@ const signUpForm = z.object({
 type SignUpFormData = z.infer<typeof signUpForm>;
 
 export function SignUp() {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { isSubmitting },
   } = useForm<SignUpFormData>();
 
-  async function handleSignUp(data: SignUpFormData) {
-    console.log(data);
+  const { mutateAsync: registerRestaurantFn } = useMutation({
+    mutationFn: registerRestaurant,
+  });
 
-    toast.success("Cadastro realizado com sucesso!", {
-      description: "Você já pode acessar o painel do parceiro",
-    });
+  async function handleSignUp(data: SignUpFormData) {
+    try {
+      await registerRestaurantFn({
+        restaurantName: data.restaurantName,
+        managerName: data.managerName,
+        email: data.email,
+        phone: data.phone,
+      });
+
+      toast.success("Cadastro realizado com sucesso!", {
+        description: "Você já pode acessar o painel do parceiro",
+        action: {
+          label: "Login",
+          onClick: () => navigate(`/sign-in?email=${data.email}`),
+        },
+      });
+    } catch (error) {
+      toast.error("Erro ao cadastrar restaurante!");
+    }
   }
 
   return (
