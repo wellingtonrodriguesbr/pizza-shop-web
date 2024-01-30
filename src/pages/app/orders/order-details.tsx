@@ -98,13 +98,13 @@ export function OrderDetails({ orderId, open }: OrderDetailsProps) {
                   <TableCell>{item.product.name}</TableCell>
                   <TableCell className="text-right">{item.quantity}</TableCell>
                   <TableCell className="text-right">
-                    {item.priceInCents.toLocaleString("pt-BR", {
+                    {(item.priceInCents / 100).toLocaleString("pt-BR", {
                       style: "currency",
                       currency: "BRL",
                     })}
                   </TableCell>
                   <TableCell className="text-right">
-                    {(item.priceInCents * item.quantity).toLocaleString(
+                    {((item.priceInCents * item.quantity) / 100).toLocaleString(
                       "pt-BR",
                       {
                         style: "currency",
@@ -120,7 +120,7 @@ export function OrderDetails({ orderId, open }: OrderDetailsProps) {
               <TableRow>
                 <TableCell colSpan={3}>Total do pedido</TableCell>
                 <TableCell className="text-right font-medium">
-                  {data?.totalInCents.toLocaleString("pt-BR", {
+                  {(data.totalInCents / 100).toLocaleString("pt-BR", {
                     style: "currency",
                     currency: "BRL",
                   })}
