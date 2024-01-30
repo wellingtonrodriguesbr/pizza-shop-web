@@ -7,6 +7,7 @@ import { OrderStatus } from "@/components/order-status";
 
 import { formatDistanceToNow } from "date-fns";
 import { ptBR } from "date-fns/locale";
+import { useState } from "react";
 
 interface OrderTableRowProps {
   order: {
@@ -19,10 +20,12 @@ interface OrderTableRowProps {
 }
 
 export function OrderTableRow({ order }: OrderTableRowProps) {
+  const [isOpenDetails, setIsOpenDetails] = useState(false);
+
   return (
     <TableRow>
       <TableCell>
-        <Dialog>
+        <Dialog open={isOpenDetails} onOpenChange={setIsOpenDetails}>
           <DialogTrigger asChild>
             <Button variant="outline" size="xs">
               <Search className="h-3 w-3" />
@@ -30,7 +33,7 @@ export function OrderTableRow({ order }: OrderTableRowProps) {
             </Button>
           </DialogTrigger>
 
-          <OrderDetails />
+          <OrderDetails orderId={order.orderId} open={isOpenDetails} />
         </Dialog>
       </TableCell>
       <TableCell className="font-mono text-xs font-medium">
