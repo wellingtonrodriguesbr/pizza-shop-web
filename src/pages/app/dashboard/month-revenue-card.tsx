@@ -26,7 +26,7 @@ export function MonthRevenueCard() {
               currency: "BRL",
             })}
         </span>
-        {data?.diffFromLastMonth && data?.diffFromLastMonth >= 0 ? (
+        {data!.diffFromLastMonth >= 0 ? (
           <p className="text-xs text-muted-foreground">
             <span className="text-emerald-500 dark:text-emerald-400">
               +{data?.diffFromLastMonth}%
