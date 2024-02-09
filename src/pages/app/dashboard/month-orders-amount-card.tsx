@@ -10,7 +10,9 @@ export function MonthOrdersAmountCard() {
     queryFn: getMonthOrdersAmount,
   });
 
-  console.log(data?.diffFromLastMonth);
+  if (!data) {
+    return null;
+  }
 
   return (
     <Card>
@@ -20,19 +22,19 @@ export function MonthOrdersAmountCard() {
       </CardHeader>
       <CardContent className="space-y-1">
         <span className="text-2xl font-bold tracking-tight">
-          {data?.amount.toLocaleString("pt-BR")}
+          {data.amount.toLocaleString("pt-BR")}
         </span>
         {data!.diffFromLastMonth >= 0 ? (
           <p className="text-xs text-muted-foreground">
             <span className="text-emerald-500 dark:text-emerald-400">
-              +{data?.diffFromLastMonth}%
+              +{data.diffFromLastMonth}%
             </span>{" "}
             em relação ao mês passado
           </p>
         ) : (
           <p className="text-xs text-muted-foreground">
             <span className="text-rose-500 dark:text-rose-400">
-              {data?.diffFromLastMonth}%
+              {data.diffFromLastMonth}%
             </span>{" "}
             em relação ao mês passado
           </p>

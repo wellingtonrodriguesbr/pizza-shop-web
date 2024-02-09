@@ -15,9 +15,9 @@ export function Dashboard() {
         <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
 
         <div className="grid grid-cols-4 gap-4">
+          <DayOrdersAmountCard />
           <MonthRevenueCard />
           <MonthOrdersAmountCard />
-          <DayOrdersAmountCard />
           <MonthCanceledOrdersAmountCard />
         </div>
 

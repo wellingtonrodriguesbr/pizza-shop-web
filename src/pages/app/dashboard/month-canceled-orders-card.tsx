@@ -10,6 +10,10 @@ export function MonthCanceledOrdersAmountCard() {
     queryFn: getMonthCanceledOrdersAmount,
   });
 
+  if (!data) {
+    return null;
+  }
+
   return (
     <Card>
       <CardHeader className="flex-row items-center justify-between space-y-0 pb-2">
@@ -22,17 +26,17 @@ export function MonthCanceledOrdersAmountCard() {
         <span className="text-2xl font-bold tracking-tight">
           {data?.amount.toLocaleString("pt-BR")}
         </span>
-        {data?.diffFromLastMonth && data?.diffFromLastMonth < 0 ? (
+        {data.diffFromLastMonth < 0 ? (
           <p className="text-xs text-muted-foreground">
-            <span className="text-rose-500 dark:text-rose-400">
-              +{data?.diffFromLastMonth}%
+            <span className="text-emerald-500 dark:text-emerald-400">
+              {data.diffFromLastMonth}%
             </span>{" "}
             em relação ao mês passado
           </p>
         ) : (
           <p className="text-xs text-muted-foreground">
-            <span className="text-emerald-500 dark:text-emerald-400">
-              {data?.diffFromLastMonth}%
+            <span className="text-rose-500 dark:text-rose-400">
+              +{data.diffFromLastMonth}%
             </span>{" "}
             em relação ao mês passado
           </p>

@@ -10,6 +10,10 @@ export function MonthRevenueCard() {
     queryFn: getMonthRevenue,
   });
 
+  if (!data) {
+    return null;
+  }
+
   return (
     <Card>
       <CardHeader className="flex-row items-center justify-between space-y-0 pb-2">
@@ -21,22 +25,22 @@ export function MonthRevenueCard() {
       <CardContent className="space-y-1">
         <span className="text-2xl font-bold tracking-tight">
           {data?.diffFromLastMonth &&
-            (data?.receipt / 1000).toLocaleString("pt-BR", {
+            (data.receipt / 1000).toLocaleString("pt-BR", {
               style: "currency",
               currency: "BRL",
             })}
         </span>
-        {data!.diffFromLastMonth >= 0 ? (
+        {data.diffFromLastMonth >= 0 ? (
           <p className="text-xs text-muted-foreground">
             <span className="text-emerald-500 dark:text-emerald-400">
-              +{data?.diffFromLastMonth}%
+              +{data.diffFromLastMonth}%
             </span>{" "}
             em relação ao mês passado
           </p>
         ) : (
           <p className="text-xs text-muted-foreground">
             <span className="text-rose-500 dark:text-rose-400">
-              {data?.diffFromLastMonth}%
+              {data.diffFromLastMonth}%
             </span>{" "}
             em relação ao mês passado
           </p>
