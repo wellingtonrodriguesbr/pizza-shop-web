@@ -24,7 +24,7 @@ export function DayOrdersAmountCard() {
         <span className="text-2xl font-bold tracking-tight">
           {data?.amount.toLocaleString("pt-BR")}
         </span>
-        {data.diffFromYesterday >= 0 ? (
+        {data.diffFromYesterday > 0 ? (
           <p className="text-xs text-muted-foreground">
             <span className="text-emerald-500 dark:text-emerald-400">
               +{data?.diffFromYesterday}%
