@@ -23,6 +23,7 @@ import { DateRange } from "react-day-picker";
 import { subDays } from "date-fns";
 
 import colors from "tailwindcss/colors";
+import { Loader2 } from "lucide-react";
 
 export function RevenueChart() {
   const [dateRange, setDateRange] = useState<DateRange | undefined>({
@@ -89,7 +90,11 @@ export function RevenueChart() {
               />
             </LineChart>
           </ResponsiveContainer>
-        ) : null}
+        ) : (
+          <div className="flex items-center justify-center h-[240px] w-full">
+            <Loader2 className="w-8 h-8 text-muted-foreground animate-spin" />
+          </div>
+        )}
       </CardContent>
     </Card>
   );

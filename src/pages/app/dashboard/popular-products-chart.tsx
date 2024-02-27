@@ -1,4 +1,4 @@
-import { BarChart } from "lucide-react";
+import { BarChart, Loader2 } from "lucide-react";
 import { Cell, Pie, PieChart, ResponsiveContainer } from "recharts";
 import colors from "tailwindcss/colors";
 
@@ -86,7 +86,11 @@ export function PopularProductsChart() {
               </Pie>
             </PieChart>
           </ResponsiveContainer>
-        ) : null}
+        ) : (
+          <div className="flex items-center justify-center h-[240px] w-full">
+            <Loader2 className="w-8 h-8 text-muted-foreground animate-spin" />
+          </div>
+        )}
       </CardContent>
     </Card>
   );
